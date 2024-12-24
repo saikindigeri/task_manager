@@ -20,7 +20,7 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
   const confirmDelete = async () => {
     try {
       await deleteTask(task._id); // Call delete API
-     // Notify parent to update the task list
+    
       setIsModalOpen(false); // Close the modal after deletion
     } catch (error) {
       console.error('Failed to delete the task', error);
