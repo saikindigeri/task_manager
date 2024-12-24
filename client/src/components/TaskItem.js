@@ -21,46 +21,39 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
     setIsEditing(true);
   };
 
- const handleUpdate = async () => {
-  try {
+  const handleUpdate = () => {
     const updatedTask = {
       ...task,
       name: updatedTaskName,
       description: updatedTaskDescription,
       status: updatedTaskStatus,
     };
-
+  
     console.log('Updated task:', updatedTask); // Log to check the updated task
-
-    const response = await updateTask(task._id, updatedTask); // Send PATCH request to update the task
-
-if (response.error) {
-  console.error('API error:', response.error);
-  setAlertMessage('Failed to update the task!');
-} else {
-  setAlertMessage('Task updated successfully!');
-}
-
-    console.log('Response from update:', response); // Log the response from the backend
-
-    // Notify parent to update the task list
-    onUpdate(updatedTask);
-
-    // Exit edit mode
-    setIsEditing(false);
-
-    // Show success message
-    setAlertMessage('Task updated successfully!');
-    setTimeout(() => setAlertMessage(null), 3000); // Hide alert after 3 seconds
-  } catch (error) {
-    console.error('Failed to update the task', error);
-    
-    // Show error message
-    setAlertMessage('Failed to update the task!');
-    setTimeout(() => setAlertMessage(null), 3000); // Hide alert after 3 seconds
-  }
-};
-
+  
+    updateTask(task._id, updatedTask)  // Send PATCH request to update the task
+      .then(response => {
+        console.log('Response from update:', response); // Log the response from the backend
+  
+        // Notify parent to update the task list
+  
+  
+        // Exit edit mode
+        setIsEditing(false);
+  
+        // Show success message
+        setAlertMessage('Task updated successfully!');
+        setTimeout(() => setAlertMessage(null), 3000); // Hide alert after 3 seconds
+      })
+      .catch(error => {
+        console.error('Failed to update the task', error);
+  
+        // Show error message
+        setAlertMessage('Failed to update the task!');
+        setTimeout(() => setAlertMessage(null), 3000); // Hide alert after 3 seconds
+      });
+  };
+  
   return (
     <div className="task-item">
       {alertMessage && <div className="alert">{alertMessage}</div>}
