@@ -8,52 +8,53 @@ const TaskForm = ({ setTasks, tasks }) => {
     e.preventDefault();
     const newTask = await createTask(formData);
     setTasks([...tasks, newTask.data]);
-    setFormData({ name: '', description: '', dueDate: '', priority: 'Low' }); // Clear form after submit
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-6 max-w-lg mx-auto mt-10 space-y-6">
-      <h2 className="text-2xl font-bold text-center text-gray-700">Add New Task</h2>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Task Name</label>
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg mx-auto space-y-4">
+      <div className="flex flex-col space-y-2">
+        <label htmlFor="task-name" className="text-sm font-medium text-gray-700">Task Name</label>
         <input
+          id="task-name"
           type="text"
-          className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          placeholder="Enter task name"
+          placeholder="Task Name"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           required
+          className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Description</label>
+      <div className="flex flex-col space-y-2">
+        <label htmlFor="description" className="text-sm font-medium text-gray-700">Description</label>
         <textarea
-          className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          placeholder="Describe the task"
+          id="description"
+          placeholder="Description"
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Due Date</label>
+      <div className="flex flex-col space-y-2">
+        <label htmlFor="due-date" className="text-sm font-medium text-gray-700">Due Date</label>
         <input
+          id="due-date"
           type="date"
-          className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
           value={formData.dueDate}
           onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
           required
+          className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Priority</label>
+      <div className="flex flex-col space-y-2">
+        <label htmlFor="priority" className="text-sm font-medium text-gray-700">Priority</label>
         <select
-          className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          id="priority"
           value={formData.priority}
           onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
+          className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
@@ -63,7 +64,7 @@ const TaskForm = ({ setTasks, tasks }) => {
 
       <button
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-md shadow-md"
+        className="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
       >
         Add Task
       </button>

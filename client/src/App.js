@@ -15,7 +15,7 @@ const App = () => {
       setTasks(res.data);
       setFilteredTasks(res.data);
     });
-  }, []);
+  }, [tasks]);
 
   const handleFilter = (status) => {
     setStatus(status);
