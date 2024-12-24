@@ -9,7 +9,9 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
   const [alertMessage, setAlertMessage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // State for Modal visibility
 
-  
+  const currentDate = new Date();
+  const dueDate = new Date(task.dueDate);
+  const isOverdue = dueDate < currentDate;
   // Delete Task
   const handleDelete = () => {
     setIsModalOpen(true); // Open the confirmation modal
@@ -138,7 +140,9 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
           </div>
         </div>
       ) : (
-        <div className="task-details space-y-4">
+        <div
+        className={`task-item ${isOverdue ? 'bg-red-200 border-red-500' : 'bg-white'} border rounded-lg p-4 mb-4`}
+      >
           <h3 className="text-xl font-semibold">{task.name}</h3>
           <p>{task.description}</p>
           <p className="text-gray-500">Status: {task.status}</p>
