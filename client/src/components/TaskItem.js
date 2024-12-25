@@ -12,6 +12,7 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
   const currentDate = new Date();
   const dueDate = new Date(task.dueDate);
   const isOverdue = dueDate < currentDate;
+
   // Delete Task
   const handleDelete = () => {
     setIsModalOpen(true); // Open the confirmation modal
@@ -20,8 +21,8 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
   const confirmDelete = async () => {
     try {
       await deleteTask(task._id); // Call delete API
-    
       setIsModalOpen(false); // Close the modal after deletion
+      onDelete(task._id); // Optionally notify the parent to remove the task from the list
     } catch (error) {
       console.error('Failed to delete the task', error);
       setIsModalOpen(false); // Close the modal even if the delete fails
@@ -46,15 +47,12 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
       status: updatedTaskStatus,
     };
 
-    console.log('Updated task:', updatedTask); // Log to check the updated task
-
     updateTask(task._id, updatedTask) // Send PATCH request to update the task
       .then(response => {
         console.log('Response from update:', response); // Log the response from the backend
 
         // Notify parent to update the task list
-       
-
+     
         // Exit edit mode
         setIsEditing(false);
 
@@ -72,7 +70,7 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
   };
 
   return (
-    <div className="task-item bg-white p-4 rounded-lg shadow-md mb-4">
+    <div className={`task-item p-4 rounded-lg shadow-md ${isOverdue ? 'bg-red-100 border-red-400' : 'bg-white'} mb-4`}>
       {alertMessage && (
         <div className="alert bg-green-500 text-white p-2 rounded-md mb-4">{alertMessage}</div>
       )}
@@ -101,24 +99,24 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
       )}
 
       {isEditing ? (
-        <div className="edit-form space-y-4">
+        <div className="edit-form space-y-6">
           <input
             type="text"
             value={updatedTaskName}
             onChange={(e) => setUpdatedTaskName(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md"
+            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
             placeholder="Task Name"
           />
           <textarea
             value={updatedTaskDescription}
             onChange={(e) => setUpdatedTaskDescription(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md"
+            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
             placeholder="Task Description"
           />
           <select
             value={updatedTaskStatus}
             onChange={(e) => setUpdatedTaskStatus(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md"
+            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
           >
             <option value="Pending">Pending</option>
             <option value="In Progress">In Progress</option>
@@ -140,9 +138,7 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
           </div>
         </div>
       ) : (
-        <div
-        className={`task-item ${isOverdue ? 'bg-red-200 border-red-500' : 'bg-white'} border rounded-lg p-4 mb-4`}
-      >
+        <div className="flex flex-col space-y-4">
           <h3 className="text-xl font-semibold">{task.name}</h3>
           <p>{task.description}</p>
           <p className="text-gray-500">Status: {task.status}</p>

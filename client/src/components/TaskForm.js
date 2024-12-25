@@ -11,8 +11,8 @@ const TaskForm = ({ setTasks, tasks }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg mx-auto space-y-4">
-      <div className="flex flex-col space-y-2">
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto space-y-6">
+      <div className="flex flex-col space-y-4">
         <label htmlFor="task-name" className="text-sm font-medium text-gray-700">Task Name</label>
         <input
           id="task-name"
@@ -25,7 +25,7 @@ const TaskForm = ({ setTasks, tasks }) => {
         />
       </div>
 
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-4">
         <label htmlFor="description" className="text-sm font-medium text-gray-700">Description</label>
         <textarea
           id="description"
@@ -36,7 +36,7 @@ const TaskForm = ({ setTasks, tasks }) => {
         />
       </div>
 
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-4">
         <label htmlFor="due-date" className="text-sm font-medium text-gray-700">Due Date</label>
         <input
           id="due-date"
@@ -48,7 +48,7 @@ const TaskForm = ({ setTasks, tasks }) => {
         />
       </div>
 
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-4">
         <label htmlFor="priority" className="text-sm font-medium text-gray-700">Priority</label>
         <select
           id="priority"
