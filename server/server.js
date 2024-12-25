@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
-
+ 
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -31,7 +31,7 @@ const taskSchema = new mongoose.Schema({
     enum: ['Low', 'Medium', 'High'],
     default: 'Low',
   },
-});
+}); 
 
 const Task = mongoose.model('Task', taskSchema);
 
