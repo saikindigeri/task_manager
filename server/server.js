@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('MongoDB connected'))
 .catch((err) => console.log(err));
 
-// Task Schema
+
 const taskSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: String,
