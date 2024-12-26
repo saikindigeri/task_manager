@@ -11,7 +11,13 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
-mongoose.connect(config.connectionString);
+mongoose.connect(config.connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected'))
+.catch((err) => console.error('MongoDB connection error:', err));
+
 
 
 // MongoDB Connection
