@@ -1,3 +1,9 @@
-{
+/*{
     "connectionString":"mongodb+srv://saikumardev018:saideva@cluster0.zfykq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+}
+*/
+
+{
+
+    "connectionString":"localhost:27017"
 }
