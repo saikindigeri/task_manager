@@ -22,7 +22,7 @@ const connectToDatabase = async () => {
     process.exit(1); // Exit the application if connection fails
   }
 }; 
- 
+  
 connectToDatabase();
 
 // MongoDB Task Schema and Model
