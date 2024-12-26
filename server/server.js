@@ -14,7 +14,7 @@ const connectToDatabase = async () => {
     // Use the connection string from the .env file or fallback to local MongoDB
    // const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/myDatabase';
    
-    const mongoURI = process.env.MONGO_URI 
+    const mongoURI = "mongodb+srv://saikumardev018:saideva@cluster0.ngvpr.mongodb.net/myDatabase?retryWrites=true&w=majority&appName=Cluster0"
     await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log("Connected to MongoDB"); 
   } catch (error) {
